@@ -3,8 +3,10 @@ const inquirer = require ('inquirer');
 const { start } = require('repl');
 const connection = mysql.createConnection({
     host: 'localhost',
-
+    
     port: 3306,
+
+    user: 'root',
 
     password: 'Ezequ1a1e3^+=%<>',
     database: 'employee_tracker',
@@ -33,7 +35,7 @@ const runSearch = () => {
     })
 
     .then((answer) => {
-        switch (start.answer) {
+        switch (answer.start) {
             case 'Add Departments':
             depAdd();
             break;
@@ -77,35 +79,14 @@ inquirer
     message: 'What department would you like to add?',
 })
 .then((answer) => {
-    const query = 'ADD name FROM departments WHERE ?';
+    const query = 'INSERT INTO department SET ?';
     connection.query(query, { name: answer.name }, (err,res) => {
-        res.forEach(({name}) => {
-            console.log(
-                `Name: ${name}`
-            );
+        if (err) console.log(err);
+            
+            console.log(res);
             runSearch();
         });
-    })
 
 })}
 
 
-const rolesAdd = () => {
-    inquirer
-    .prompt({
-        name: 'title',
-        type: 'input',
-        message: 'What role would you like to add?',
-    })
-    .then((answer) => {
-        const query = 'ADD  salary, department_id FROM departments WHERE ?';
-        connection.query(query, { title: answer.title }, (err,res) => {
-            res.forEach(({name}) => {
-                console.log(
-                    `Name: ${name}`
-                );
-                runSearch();
-            });
-        })
-    
-    })}
