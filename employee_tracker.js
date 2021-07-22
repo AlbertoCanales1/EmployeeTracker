@@ -6,7 +6,7 @@ const connection = mysql.createConnection({
 
     port: 3306,
 
-    password: '',
+    password: 'Ezequ1a1e3^+=%<>',
     database: 'employee_tracker',
 });
 
@@ -69,3 +69,6 @@ const runSearch = () => {
     });
 };
 
+const depAdd = () =>{
+
+}
