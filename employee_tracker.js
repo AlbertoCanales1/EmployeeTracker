@@ -90,3 +90,111 @@ inquirer
 })}
 
 
+const rolesAdd = () => {
+    inquirer
+    .prompt({
+        name: 'roles',
+        type: 'input',
+        message: 'What roles would you like to add?',
+    })
+    .then((answer) => {
+        const query = 'INSERT INTO roles SET ?';
+        connection.query(query, { roles: answer.roles }, (err,res) => {
+            if (err) console.log(err);
+                
+                console.log(res);
+                runSearch();
+            });
+    
+    })}
+
+    
+const empAdd = () => {
+    inquirer
+    .prompt({
+        name: 'employee',
+        type: 'input',
+        message: 'What employee would you like to add?',
+    })
+    .then((answer) => {
+        const query = 'INSERT INTO employee SET ?';
+        connection.query(query, { employee: answer.employee }, (err,res) => {
+            if (err) console.log(err);
+                
+                console.log(res);
+                runSearch();
+            });
+    
+    })}
+
+const depView = () => {
+    inquirer
+    .prompt({
+        name: 'employeeV',
+        type: 'input',
+        message: 'What department would you like to view?',
+    })
+.then((answer) => {
+    const query = 'SELECT name FROM department WHERE ?';
+    connection.query(query, { employeeV: answer.employeeV }, (err, res) =>{
+        res.forEach(({employeeV}) => {
+            console.log(
+                `Name: ${employeeV}`
+            );
+        });
+        runSearch();
+    })
+})
+}
+
+
+const roleView = () => {
+    inquirer
+    .prompt({
+        name: 'rolev',
+        type: 'input',
+        message: 'What role would you like to view?',
+    })
+.then((answer) => {
+    const query = 'SELECT title FROM role WHERE ?';
+    connection.query(query, { roleV: answer.roleV }, (err, res) =>{
+        res.forEach(({roleV}) => {
+            console.log(
+                `Role: ${roleV}`
+            );
+        });
+        runSearch();
+    })
+})
+}
+
+
+const empView = () => {
+    inquirer
+    .prompt({
+        name: 'employeeV',
+        type: 'input',
+        message: 'What employee would you like to view?',
+    })
+.then((answer) => {
+    const query = 'SELECT first_name FROM employee WHERE ?';
+    connection.query(query, { employeeV: answer.employeeV }, (err, res) =>{
+        res.forEach(({employeeV}) => {
+            console.log(
+                `Name: ${employeeV}`
+            );
+        });
+        runSearch();
+    })
+})
+}
+
+// const empUpdate = () =>{
+//     inquirer
+//     .prompt({
+//         name: 'employeeU',
+//         type: 'input',
+//         message: 'What would you like to update?'
+//     })
+// .then((result) => {
+    
