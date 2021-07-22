@@ -69,6 +69,43 @@ const runSearch = () => {
     });
 };
 
-const depAdd = () =>{
+const depAdd = () => {
+inquirer
+.prompt({
+    name: 'name',
+    type: 'input',
+    message: 'What department would you like to add?',
+})
+.then((answer) => {
+    const query = 'ADD name FROM departments WHERE ?';
+    connection.query(query, { name: answer.name }, (err,res) => {
+        res.forEach(({name}) => {
+            console.log(
+                `Name: ${name}`
+            );
+            runSearch();
+        });
+    })
 
-}
+})}
+
+
+const rolesAdd = () => {
+    inquirer
+    .prompt({
+        name: 'title',
+        type: 'input',
+        message: 'What role would you like to add?',
+    })
+    .then((answer) => {
+        const query = 'ADD  salary, department_id FROM departments WHERE ?';
+        connection.query(query, { title: answer.title }, (err,res) => {
+            res.forEach(({name}) => {
+                console.log(
+                    `Name: ${name}`
+                );
+                runSearch();
+            });
+        })
+    
+    })}
